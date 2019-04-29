@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 class Register extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        nome: "",
+        email:"",
+        senha: "",
+        confirmarSenha:"",
+      };
+    }
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -11,51 +23,49 @@ class Register extends Component {
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form>
-                    <h1>Register</h1>
-                    <p className="text-muted">Create your account</p>
+                    <h1>Registrar</h1>
+                    <p className="text-muted">Crie sua conta</p>
+ 
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Username" autoComplete="username" />
+                      <Input type="text" placeholder="Nome" autoComplete="username"  value={this.state.nome} onChange={(event) => this.setState({nome: event.target.value})}/>
                     </InputGroup>
+ 
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Email" autoComplete="email" />
+                      <Input type="text" placeholder="Email" autoComplete="email"  value={this.state.email} onChange={(event) => this.setState({email: event.target.value})}/>
                     </InputGroup>
+
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" autoComplete="new-password" />
+                      <Input type="password" placeholder="Senha" autoComplete="new-password"  value={this.state.senha} onChange={(event) => this.setState({senha: event.target.value})}/>
                     </InputGroup>
+
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" autoComplete="new-password" />
+                      <Input type="password" placeholder="Repita sua senha" autoComplete="new-password"  value={this.state.confirmarSenha} onChange={(event) => this.setState({confirmarSenha: event.target.value})}/>
                     </InputGroup>
-                    <Button color="success" block>Create Account</Button>
+
+                    <Button color="success" block>Inscreva-se</Button>
+                    <Link to="/">
+                      <Button color="light" className="mt-3" block >Voltar</Button>
+                    </Link>
                   </Form>
                 </CardBody>
-                <CardFooter className="p-4">
-                  <Row>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
-                    </Col>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
-                    </Col>
-                  </Row>
-                </CardFooter>
               </Card>
             </Col>
           </Row>

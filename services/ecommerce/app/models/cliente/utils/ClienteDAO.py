@@ -8,6 +8,11 @@ class ClienteDAO:
     def __init__(self):
         pass
 
+    def login(self, login, senha):
+        cliente = Cliente.query.filter_by(login = login).first()
+        
+        return cliente
+
     def create(self, login, nome, senha):
 
         cliente = Cliente(login, nome, senha)

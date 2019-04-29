@@ -47,6 +47,11 @@ const listaFuncionario = React.lazy(() => import('./containers/app/views/funcion
 const editarFuncionario = React.lazy(() => import('./containers/app/views/funcionario/editarFuncionario'));
 const criarFuncionario = React.lazy(() => import('./containers/app/views/funcionario/criarFuncionario'));
 
+
+const listaCliente = React.lazy(() => import('./containers/app/views/cliente/listaCliente'));
+const editarCliente = React.lazy(() => import('./containers/app/views/cliente/editarCliente'));
+const criarCliente = React.lazy(() => import('./containers/app/views/cliente/criarCliente'));
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -61,6 +66,11 @@ const routes = [
   { path: '/listaFuncionario', name: 'Funcinarios', component: listaFuncionario },
   { path: '/editarFuncionario', name: 'Funcinarios', component: editarFuncionario },
   { path: '/criarFuncionario', name: 'Funcinarios', component: criarFuncionario },
+
+  { path: '/listaCliente', name: 'Clientes', component: listaCliente },
+  { path: '/editarCliente', name: 'Clientes', component: editarCliente },
+  { path: '/criarCliente', name: 'Clientes', component: criarCliente },
+  
   
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },

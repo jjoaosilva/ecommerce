@@ -61,7 +61,7 @@ class teste extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from="/" to="/listaProdutos" />
                 </Switch>
               </Suspense>
             </Container>

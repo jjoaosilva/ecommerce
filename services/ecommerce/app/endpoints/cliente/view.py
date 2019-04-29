@@ -93,4 +93,33 @@ def index():
             "mensagem": "Problema na edicao do Cliente!!!",
             "payload": error.args  
         })
-        
+
+@app.endpoint('/login-cliente')
+def index():
+    try:
+        content = request.get_json(silent = True)
+        cDAO = ClienteDAO()
+
+        response = cDAO.login(content['login'], content['senha'])
+        if response == None:
+            return jsonify({
+                "status": False,
+                "mensagem": "Login ou senha incorretos.",
+                "payload": None
+            })
+
+        return jsonify({
+            "status": True,
+            "mensagem": "Cliente foi encontrado.",
+            "payload": {
+                        'login': response.login,
+                        'nome': response.nome
+                        }
+        })
+
+    except Exception as error:
+        return jsonify({
+            "status": False,
+            "mensagem": "Problema no login do Cliente!!",
+            "payload": error.args  
+        })
