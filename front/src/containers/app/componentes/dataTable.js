@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { UncontrolledTooltip, Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 import DataTable from './dataTable';
 import {Tooltip} from '@material-ui/core'
+import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import {
     Button,
     CardFooter,
@@ -64,11 +65,13 @@ class dataTable extends Component {
                                     <td>{column['id']==="editar"? 
                                         <Row>
                                             <Tooltip placement="top" title="Deletar">
-                                                <i className="cui-trash icons font-2xl d-block" onClick={() => this.props.deleteItens(item)}/>
+                                                <i style={{color: '#20a8d8'}}className="cui-trash icons font-2xl d-block" onClick={() => this.props.deleteItens(item)}/>
                                             </Tooltip>
 
                                             <Tooltip style={{paddingLeft: '5px'}} placement="top-end" title="Editar">
-                                                <i className="cui-cog icons font-2xl d-block" onClick={() => this.props.editarItens(item)}/>
+                                              <Link style={{ textDecoration: 'none' }} to={{pathname: this.props.editPath, props: {item: item} }}>
+                                                <i className="cui-cog icons font-2xl d-block" />
+                                              </Link>  
                                             </Tooltip>
                                         </Row>
                                         : item[column['id']]}</td>

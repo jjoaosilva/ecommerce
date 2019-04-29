@@ -21,12 +21,22 @@ export default {
     {
       name: 'Produtos',
       url: '/listaProdutos',
-      icon: 'icon-drop',
+      icon: 'cui-basket-loaded',
     },
     {
-      name: 'Typography',
-      url: '/theme/typography',
-      icon: 'icon-pencil',
+      name: 'Categorias',
+      url: '/listaCategoria',
+      icon: 'cui-tags',
+    },
+    {
+      name: 'Funcionarios',
+      url: '/listaFuncionario',
+      icon: 'fa fa-address-card-o',
+    },
+    {
+      name: 'Clientes',
+      url: '/listaCliente',
+      icon: 'cui-user',
     },
     {
       title: true,

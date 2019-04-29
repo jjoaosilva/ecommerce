@@ -35,12 +35,33 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
-const listaProduto = React.lazy(() => import('./containers/app/componentes/listaProduto'));
+const listaProduto = React.lazy(() => import('./containers/app/views/produto/listaProduto'));
+const editarProduto = React.lazy(() => import('./containers/app/views/produto/editarProduto'));
+const criarProduto = React.lazy(() => import('./containers/app/views/produto/criarProduto'));
+
+const listaCategoria = React.lazy(() => import('./containers/app/views/categoria/listaCategoria'));
+const editarCategoria = React.lazy(() => import('./containers/app/views/categoria/editarCategoria'));
+const criarCategoria = React.lazy(() => import('./containers/app/views/categoria/criarCategoria'));
+
+const listaFuncionario = React.lazy(() => import('./containers/app/views/funcionario/listaFuncionario'));
+const editarFuncionario = React.lazy(() => import('./containers/app/views/funcionario/editarFuncionario'));
+const criarFuncionario = React.lazy(() => import('./containers/app/views/funcionario/criarFuncionario'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/listaProdutos', name: 'Produtos', component: listaProduto },
+  { path: '/editarProduto', name: 'Produtos', component: editarProduto },
+  { path: '/criarProduto', name: 'Produtos', component: criarProduto },
+
+  { path: '/listaCategoria', name: 'Categorias', component: listaCategoria },
+  { path: '/editarCategoria', name: 'Categorias', component: editarCategoria },
+  { path: '/criarCategoria', name: 'Categorias', component: criarCategoria },
+
+  { path: '/listaFuncionario', name: 'Funcinarios', component: listaFuncionario },
+  { path: '/editarFuncionario', name: 'Funcinarios', component: editarFuncionario },
+  { path: '/criarFuncionario', name: 'Funcinarios', component: criarFuncionario },
+  
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
