@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
+import Auth from '../../../containers/services/auth';
 class Login extends Component {
 
 constructor(props) {
   super(props);
   this.state = {
-      nome: "",
+      login: "",
       senha: "",
+      dangerAlert: false,
+      mensageAlert: ""
     };
   }
 
+  async login (){
+    const {data} = await Auth.post("/login-cliente",{login:this.state.login, senha:this.state.senha});
+    this.setState({
+      mensageAlert: data['mensagem']
+      }, () => {
+              this.showAlert(data['status'])
+              this.acessToken(data['status'], data['payload'])
+      })
+  }
 
+  acessToken = (status, user) => {
+    if(status){
+      localStorage.setItem('user', user['login']);
+      window.location.replace("/");
+    }
+  }
+
+  showAlert(alert){ 
+    if(!alert){
+        this.setState({
+            dangerAlert: true
+        }, () => setTimeout(() => this.setState({dangerAlert: false}), 5000))           
+    }
+}
 
   render() {
     return (
@@ -23,6 +49,11 @@ constructor(props) {
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
+                    {this.state.dangerAlert && 
+                        <Alert color="danger">
+                            {this.state.mensageAlert}
+                        </Alert>
+                    }
                     <Form>
                       <h1>Login</h1>
                       <p className="text-muted">Faça login em sua conta</p>
@@ -30,7 +61,7 @@ constructor(props) {
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>@</InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Email" autoComplete="username" value={this.state.nome} onChange={(event) => this.setState({nome: event.target.value})}/>
+                        <Input type="text" placeholder="Email" autoComplete="username" value={this.state.login} onChange={(event) => this.setState({login: event.target.value})}/>
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -42,7 +73,10 @@ constructor(props) {
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button color="primary" className="px-4">Entrar</Button>
+                        {/* <Link to="/"> */}
+                          <Button onClick={this.login.bind(this)} color="primary" className="px-4">Entrar</Button>
+                        {/* </Link> */}
+                          
                         </Col>
                         {/* <Col xs="6" className="text-right">
                           <Button color="link" className="px-0">Forgot password?</Button>

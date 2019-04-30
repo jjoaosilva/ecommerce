@@ -1,6 +1,6 @@
 import { create } from "apisauce";
 
-// const token = localStorage.getItem("user_id");
+const token = localStorage.getItem("user");
 
 export const Servico = create({
   baseURL: 'http://localhost:5000',
@@ -9,5 +9,11 @@ export const Servico = create({
   }
 });
 
+Servico.addResponseTransform(response => {
+  if (token == null) {
+    localStorage.removeItem("user");
+    window.location.replace("/#/login");
+  }
+});
 
 export default Servico;
