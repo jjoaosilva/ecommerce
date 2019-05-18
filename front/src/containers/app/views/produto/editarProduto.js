@@ -43,12 +43,16 @@ class editarProduto extends Component {
     
     componentWillMount(){
       this.procurarCategorias()
-      this.setState({
-        nome:this.props.location.props.item['nome'],
-        descricao:this.props.location.props.item['descricao'],
-        preco:this.props.location.props.item['preco'],
-        categoriaSelecionada:this.props.location.props.item['categoria']
-      })
+      const produto = JSON.parse(this.props.match.params.produto);
+
+      if(produto){
+        this.setState({
+          nome : produto['nome'],
+          descricao : produto['descricao'],
+          preco : produto['preco'],
+          categoriaSelecionada : produto['categoria'],
+        })
+      } 
     }
 
     async procurarCategorias (){

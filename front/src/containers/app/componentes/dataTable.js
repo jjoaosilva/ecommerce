@@ -31,6 +31,7 @@ class dataTable extends Component {
         this.state = {
           selecionados : [],
           data : this.props.data,
+          editPath: "?"
         };
       }
       
@@ -69,7 +70,7 @@ class dataTable extends Component {
                                             </Tooltip>
 
                                             <Tooltip style={{paddingLeft: '5px'}} placement="top-end" title="Editar">
-                                              <Link style={{ textDecoration: 'none' }} to={{pathname: this.props.editPath, props: {item: item} }}>
+                                              <Link style={{ textDecoration: 'none' }} to={{pathname: this.props.editPath.concat(`/${JSON.stringify(item)}`), props: {item: item} }}>
                                                 <i className="cui-cog icons font-2xl d-block" />
                                               </Link>  
                                             </Tooltip>
