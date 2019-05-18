@@ -101,7 +101,7 @@ def index():
         cDAO = ClienteDAO()
 
         response = cDAO.login(content['login'], content['senha'])
-        if response == None:
+        if response == None or response.senha != content['senha']:
             return jsonify({
                 "status": False,
                 "mensagem": "Login ou senha incorretos.",

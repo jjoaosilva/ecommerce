@@ -34,6 +34,11 @@ export default {
       url: '/listaCliente',
       icon: 'cui-user',
     },
+    {
+      name: 'Home',
+      url: '/home',
+      icon: 'cui-basket-loaded',
+    },
     // {
     //   title: true,
     //   name: 'Components',

@@ -46,7 +46,7 @@ const cardChartData1 = {
 
 const cardChartOpts1 = {
   tooltips: {
-    enabled: false,
+    enabled: false, 
     custom: CustomTooltips
   },
   maintainAspectRatio: false,
