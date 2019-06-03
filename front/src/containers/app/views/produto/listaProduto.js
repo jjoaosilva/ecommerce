@@ -28,7 +28,7 @@ const columnData = [
                         {"name": "Nome"     , "id":"nome"}, 
                         {"name": "Descrição", "id":"descricao"}, 
                         {"name": "Preço"    , "id":"preco"}, 
-                        {"name": "Categoria", "id":"categoria"}, 
+                        {"name": "Categoria", "id":"categoria"},    
                         {"name": ""         , "id":"editar"}
                   ];
 
@@ -162,7 +162,6 @@ class listaProduto extends Component {
                                         titleTable = "Produtos"
                                         data={this.state.data}
                                         deleteItens={this.deleteItens.bind(this)}
-                                        editarItens={this.editarItens.bind(this)}
                                         editPath={"/editarProduto"}
                                     />
                                 }

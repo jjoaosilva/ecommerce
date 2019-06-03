@@ -23,7 +23,7 @@ import {
     InputGroupText,
     Label
   } from 'reactstrap';
-
+  
 const columnData = [
                         {"name": "Nome"     , "id":"nome"}, 
                         {"name": "Descrição", "id":"descricao"}, 
@@ -160,7 +160,6 @@ class listaCategoria extends Component {
                                         titleTable = "Categorias"
                                         data={this.state.data}
                                         deleteItens={this.deleteItens.bind(this)}
-                                        editarItens={this.editarItens.bind(this)}
                                         editPath={"/editarCategoria"}
                                     />
                                 }

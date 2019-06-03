@@ -34,15 +34,27 @@ class editarCategoria extends Component {
             descricao: "",
             dangerAlert: false,
             successAlert: false,
-            mensageAlert: ""
+            mensageAlert: "",
+            render: false
           };
         }
     
     componentWillMount(){
+      const categoria = JSON.parse(atob(this.props.match.params.categoria));
+
+      if(categoria){
+        this.setState({
+          id:categoria['id']
+        }, ()=>this.getCategoria())
+      }
+    }
+    
+    async getCategoria (){
+      const {data} = await Servico.post("/get-categoria-id",{id:this.state.id});
       this.setState({
-        nome:this.props.location.props.item['nome'],
-        descricao:this.props.location.props.item['descricao'],
-      })
+            nome: data.payload.nome,
+            descricao: data.payload.descricao,
+      }, () => this.setState({render: true}))
     }
 
     async editarCategoria (){
@@ -78,6 +90,7 @@ class editarCategoria extends Component {
     render() {
       return (
                 <div>
+                  { this.state.render &&
                   <Col xs="12" md="12">
                     <Card>
                       <CardBody><Col xs="3" md="3" style={{ paddingBottom: "20px" }}>
@@ -120,7 +133,7 @@ class editarCategoria extends Component {
                         </div>
                       </CardBody>
                     </Card>
-                  </Col> 
+                  </Col> }
                 </div>
       );
     }

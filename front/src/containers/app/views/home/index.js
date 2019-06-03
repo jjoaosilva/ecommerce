@@ -14,52 +14,34 @@ class home extends Component {
 
     render() {
       return (
-                <div>
-                  {/* <section style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}}> */}
-                  <Row>
-                    <div style={{  display: 'flex', justifyContent: 'center', backgroundColor: 'red', width: "18rem", height: "300px",  minWidth: 0, margin: "5px"}}>
-                      <img style={{width: '100%', height: '100%'}}
-                      src="https://assets.xtechcommerce.com/uploads/images/medium/9cd410db4191aaa27c47c148bffa57cd.jpg"/>
-                    </div>
-                    
-                    <div style={{ backgroundColor: 'red', width: "18rem", height: "300px",  minWidth: 0, margin: "5px"}}>
-                      <img style={{width: '100%', height: '100%'}}
-                      src="https://static.netshoes.com.br/produtos/camisa-corinthians-i-1920-sn-estadio-nike-masculina/28/HZM-1536-028/HZM-1536-028_detalhe1.jpg"/>
-                    </div>
-                    
-                    <div style={{ backgroundColor: 'red', width: "18rem", height: "300px",  minWidth: 0, margin: "5px"}}>
-                      <img style={{width: '100%', height: '100%'}}
-                      src="https://static.netshoes.com.br/produtos/camiseta-nike-legend-20-ss-masculina/40/D12-2415-440/D12-2415-440_detalhe1.jpg"/>
-                    </div>
-                    </Row>
-                  {/* </section> */}
-
-                  {/* <Row>
+                <div style = {{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  flexWrap: 'wrap',
+                  alignContent: 'center'
+                }}>
                   <ProductCard
-                    nome = {"Camisa Juventus"}
-                    descricao = {"Ótima qualidade."}
-                    imagem = {"https://assets.xtechcommerce.com/uploads/images/medium/9cd410db4191aaa27c47c148bffa57cd.jpg"}
-                    categoria = {"Camisas"}
+                    style = {{flex: 1, padding: '10px'}}
+                    nome = {"Comedouro para Cachorros"}
+                    descricao = {"Os potes para cachorros da Zee.Dog são feitos de melamina para não acumularem bactéria, possuem base antiderrapante e estampas iradas. "}
+                    imagem = {"https://zeedog.vteximg.com.br/arquivos/ids/171309/comedouro-para-cachorros_zigzag_zeedog_cachorro_pet_dk_1_main.png"}
+                    categoria = {"Cachorros"}
                   />
                   <ProductCard
-                  nome = {"Camisa Juventus"}
-                  descricao = {"Ótima qualidade."}
-                  imagem = {"https://assets.xtechcommerce.com/uploads/images/medium/9cd410db4191aaa27c47c148bffa57cd.jpg"}
-                  categoria = {"Camisas"}
-                />
-                <ProductCard
-                    nome = {"Camisa Juventus"}
-                    descricao = {"Ótima qualidade."}
-                    imagem = {"https://assets.xtechcommerce.com/uploads/images/medium/9cd410db4191aaa27c47c148bffa57cd.jpg"}
-                    categoria = {"Camisas"}
+                    style = {{flex: 1}}
+                    nome = {"Guia para Cachorros"}
+                    descricao = {"A guia para cachorros Urban Helmets é uma edição especial da colab Zee.Dog + Urban Helmets, de tiragem limitada."}
+                    imagem = {"https://zeedog.vteximg.com.br/arquivos/guia-para-cachorros-ubarn-helmets-old-school-zeedog-cachorro-pet-dk-1-descricao.png"}
+                    categoria = {"Cachorros"}
                   />
                   <ProductCard
-                      nome = {"Camisa Juventus"}
-                      descricao = {"Ótima qualidade."}
-                      imagem = {"https://assets.xtechcommerce.com/uploads/images/medium/9cd410db4191aaa27c47c148bffa57cd.jpg"}
-                      categoria = {"Camisas"}
-                    />
-                  </Row> */}
+                    style = {{flex: 1}}
+                    nome = {"Cama para Cachorros GoT"}
+                    descricao = {"A cama para cachorros Zee.Bed Game of Thrones™ é uma edição especial da colab Zee.Dog + Game of Thrones™, de tiragem limitada."}
+                    imagem = {"https://zeedog.vteximg.com.br/arquivos/ids/173521/cama-para-cachorros-game-of-thrones-got-zeebed-vacuo-nasa-cachorro-pet-main.png"}
+                    categoria = {"Cachorros"}
+                  />
                 </div>
       );
     }

@@ -36,16 +36,27 @@ class editarCliente extends Component {
             senha: "",
             dangerAlert: false,
             successAlert: false,
-            mensageAlert: ""
+            mensageAlert: "",
+            render: false,
           };
         }
     
     componentWillMount(){
+      const cliente = JSON.parse(atob(this.props.match.params.cliente));
+
+      if(cliente){
+        this.setState({
+          id:cliente['id']
+        }, ()=>this.getCliente())
+      }
+    }
+    
+    async getCliente (){
+      const {data} = await Servico.post("/get-cliente-id",{login:this.state.id});
       this.setState({
-        nome:this.props.location.props.item['nome'],
-        login:this.props.location.props.item['login'],
-        senha:this.props.location.props.item['senha'],
-      })
+            login: data.payload.login,
+            nome: data.payload.nome,
+      }, () => this.setState({render: true}))
     }
 
     async editarCliente (){
@@ -83,6 +94,7 @@ class editarCliente extends Component {
     render() {
       return (
                 <div>
+                  {this.state.render && 
                   <Col xs="12" md="12">
                     <Card>
                       <CardBody><Col xs="3" md="3" style={{ paddingBottom: "20px" }}>
@@ -105,17 +117,17 @@ class editarCliente extends Component {
                           <Col xs="12" md="6">
                             <FormGroup>
                                 <Label htmlFor="nome">Login</Label>
-                                <Input type="text" id="login" placeholder="Login do Funcionario" value={this.state.login} onChange={(event) => this.setState({login: event.target.value})}/>
+                                <Input type="text" id="login" placeholder="Login do Cliente" value={this.state.login} onChange={(event) => this.setState({login: event.target.value})}/>
                               </FormGroup>
 
                               <FormGroup>
                                 <Label htmlFor="nome">Nome</Label>
-                                <Input type="text" id="nome" placeholder="Nome do Funcionario" value={this.state.nome} onChange={(event) => this.setState({nome: event.target.value})}/>
+                                <Input type="text" id="nome" placeholder="Nome do Cliente" value={this.state.nome} onChange={(event) => this.setState({nome: event.target.value})}/>
                               </FormGroup>
 
                               <FormGroup>
                                 <Label htmlFor="senha">Senha</Label>
-                                <Input type="text" id="senha" placeholder="Senha do Funcionario" value={this.state.senha} onChange={(event) => this.setState({senha: event.target.value})}/>
+                                <Input type="text" id="senha" placeholder="Senha do Cliente" value={this.state.senha} onChange={(event) => this.setState({senha: event.target.value})}/>
                               </FormGroup>
                           </Col>
                         </Row>
@@ -129,7 +141,7 @@ class editarCliente extends Component {
                         </div>
                       </CardBody>
                     </Card>
-                  </Col> 
+                  </Col> }
                 </div>
       );
     }

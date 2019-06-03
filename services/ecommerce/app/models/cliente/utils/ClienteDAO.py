@@ -53,4 +53,14 @@ class ClienteDAO:
         db.session.commit()
 
         return c
+
+    def getClienteById(self, login):
+
+        sql = """ SELECT login, nome FROM clientes  WHERE login ilike \'{login}\'
+    
+              """.format(login=login)
+
+        con = db.engine.connect()
+        cliente = con.execute(sqlalchemy.text(sql)).fetchone()
+        return cliente
     

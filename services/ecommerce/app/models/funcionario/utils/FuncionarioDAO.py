@@ -52,4 +52,13 @@ class FuncionarioDAO:
         db.session.commit()
 
         return f
+
+    def getFuncionarioById(self, login):
+
+        sql = """ SELECT login, nome, salario FROM funcionarios WHERE login ilike \'{login}\'
+              """.format(login=login)
+
+        con = db.engine.connect()
+        funcionario = con.execute(sqlalchemy.text(sql)).fetchone()
+        return funcionario
     

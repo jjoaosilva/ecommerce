@@ -25,10 +25,10 @@ import {
   } from 'reactstrap';
 
 const columnData = [
-                        {"name": "Login"   , "id":"login"}, 
+                        {"name": "Login"   , "id":"id"}, 
                         {"name": "Nome"    , "id":"nome"}, 
                         {"name": "Salario" , "id":"salario"},   
-                        {"name": ""        , "id":"editar"}
+                        {"name": ""        , "id":"editar"}, 
                   ];
 
 class listaFuncionario extends Component {

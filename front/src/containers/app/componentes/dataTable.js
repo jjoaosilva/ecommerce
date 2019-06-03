@@ -55,22 +55,22 @@ class dataTable extends Component {
                   <thead>
                     <tr>
                         {this.props.columnData.map((column, index) =>
-                                <th>{column['name']}</th>
+                                <th key={index}>{column['name']}</th>
                         )}
                     </tr>
                   </thead>
                   <tbody>
                         {this.state.data.map((item, index) =>
-                            <tr>
-                                {this.props.columnData.map((column, index,) =>
-                                    <td>{column['id']==="editar"? 
+                            <tr key={index}>
+                                {this.props.columnData.map((column, index) =>
+                                    <td key={index}>{column['id']==="editar"? 
                                         <Row>
                                             <Tooltip placement="top" title="Deletar">
                                                 <i style={{color: '#20a8d8'}}className="cui-trash icons font-2xl d-block" onClick={() => this.props.deleteItens(item)}/>
                                             </Tooltip>
 
-                                            <Tooltip style={{paddingLeft: '5px'}} placement="top-end" title="Editar">
-                                              <Link style={{ textDecoration: 'none' }} to={{pathname: this.props.editPath.concat(`/${JSON.stringify(item)}`), props: {item: item} }}>
+                                            <Tooltip style={{paddingLeft: '5px'}} placement="top-end" title="Editar"> 
+                                              <Link style={{ textDecoration: 'none' }} to={{pathname: this.props.editPath.concat(`/${btoa(JSON.stringify({id: item.id}))}`), props: {item: item} }}>
                                                 <i className="cui-cog icons font-2xl d-block" />
                                               </Link>  
                                             </Tooltip>

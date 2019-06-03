@@ -95,3 +95,29 @@ def index():
             "payload": error.args  
         })
         
+@app.endpoint('/get-categoria-id')
+def index():
+    try:
+        content = request.get_json(silent = True)
+        cDAO = CategoriaDAO()
+
+        categoria = cDAO.getCategoriaById(content['id'])
+
+        response = {
+            "id"           : categoria.id,
+            "nome"         : categoria.nome, 
+            "descricao"    : categoria.descricao
+        }
+
+        return jsonify({
+            "status": True,
+            "mensagem": None,
+            "payload": response
+        })
+
+    except Exception as error:
+        return jsonify({
+            "status": False,
+            "mensagem": "Problema na procura de Categoria!!!",
+            "payload": error.args  
+        })

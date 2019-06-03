@@ -47,4 +47,13 @@ class CategoriaDAO:
         db.session.commit()
 
         return c
+
+    def getCategoriaById(self, id):
+
+        sql = """ SELECT id, nome, descricao FROM categorias WHERE id={id}
+              """.format(id=id)
+
+        con = db.engine.connect()
+        categoria = con.execute(sqlalchemy.text(sql)).fetchone()
+        return categoria
     

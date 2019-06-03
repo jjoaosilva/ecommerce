@@ -64,15 +64,15 @@ const routes = [
   { path: '/criarProduto', name: 'Produtos', component: criarProduto },
 
   { path: '/listaCategoria', name: 'Categorias', component: listaCategoria },
-  { path: '/editarCategoria', name: 'Categorias', component: editarCategoria },
+  { path: '/editarCategoria/:categoria', name: 'Categorias', component: editarCategoria },
   { path: '/criarCategoria', name: 'Categorias', component: criarCategoria },
 
   { path: '/listaFuncionario', name: 'Funcinarios', component: listaFuncionario },
-  { path: '/editarFuncionario', name: 'Funcinarios', component: editarFuncionario },
+  { path: '/editarFuncionario/:funcionario', name: 'Funcinarios', component: editarFuncionario },
   { path: '/criarFuncionario', name: 'Funcinarios', component: criarFuncionario },
 
   { path: '/listaCliente', name: 'Clientes', component: listaCliente },
-  { path: '/editarCliente', name: 'Clientes', component: editarCliente },
+  { path: '/editarCliente/:cliente', name: 'Clientes', component: editarCliente },
   { path: '/criarCliente', name: 'Clientes', component: criarCliente },
   
   

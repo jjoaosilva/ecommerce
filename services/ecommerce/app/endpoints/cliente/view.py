@@ -35,7 +35,7 @@ def index():
         clientes = []
         for cliente in response:
             clientes.append({
-                'login': cliente['login'],
+                'id': cliente['login'],
                 'nome': cliente['nome']
             })
 
@@ -121,5 +121,31 @@ def index():
         return jsonify({
             "status": False,
             "mensagem": "Problema no login do Cliente!!",
+            "payload": error.args  
+        })
+
+@app.endpoint('/get-cliente-id')
+def index():
+    try:
+        content = request.get_json(silent = True)
+        cDAO = ClienteDAO()
+
+        cliente = cDAO.getClienteById(content['login'])
+
+        response = {
+            "login" : cliente.login,
+            "nome"  : cliente.nome, 
+        }
+
+        return jsonify({
+            "status": True,
+            "mensagem": None,
+            "payload": response
+        })
+
+    except Exception as error:
+        return jsonify({
+            "status": False,
+            "mensagem": "Problema na procura de Cliente!!!",
             "payload": error.args  
         })

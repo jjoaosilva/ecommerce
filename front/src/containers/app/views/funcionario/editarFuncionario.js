@@ -36,17 +36,28 @@ class editarFuncionario extends Component {
             senha: "",
             dangerAlert: false,
             successAlert: false,
-            mensageAlert: ""
+            mensageAlert: "",
+            render: false,
           };
         }
     
     componentWillMount(){
+      const funcionario = JSON.parse(atob(this.props.match.params.funcionario));
+
+      if(funcionario){
+        this.setState({
+          id:funcionario['id']
+        }, ()=>this.geFuncionario())
+      }
+    }
+    
+    async geFuncionario (){
+      const {data} = await Servico.post("/get-funcionario-id",{login:this.state.id});
       this.setState({
-        nome:this.props.location.props.item['nome'],
-        login:this.props.location.props.item['login'],
-        salario:this.props.location.props.item['salario'],
-        senha:this.props.location.props.item['senha'],
-      })
+            login: data.payload.login,
+            nome: data.payload.nome,
+            salario: data.payload.salario,
+      }, () => this.setState({render: true}))
     }
 
     async editarFuncionario (){
@@ -86,6 +97,7 @@ class editarFuncionario extends Component {
     render() {
       return (
                 <div>
+                  {this.state.render && 
                   <Col xs="12" md="12">
                     <Card>
                       <CardBody><Col xs="3" md="3" style={{ paddingBottom: "20px" }}>
@@ -137,7 +149,7 @@ class editarFuncionario extends Component {
                         </div>
                       </CardBody>
                     </Card>
-                  </Col> 
+                  </Col> }
                 </div>
       );
     }

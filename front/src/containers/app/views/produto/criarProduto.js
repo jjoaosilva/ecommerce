@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { Alert, Modal, ModalBody, ModalFooter, ModalHeader, Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Alert, Modal, ModalBody, ModalFooter, ModalHeader, Badge, CardBody, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import Servico from '../../../services/servico';
-
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import red from '@material-ui/core/colors/red';
 import {
     Button,
     CardFooter,
@@ -23,6 +28,32 @@ import {
     Label
   } from 'reactstrap';
 
+  var styles = theme => ({
+    card: {
+      maxWidth: 350,
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%', // 16:9 
+    },
+    actions: {
+      display: 'flex',
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+    avatar: {
+      backgroundColor: red[500],
+    },
+  });
+  
 
 class criarProduto extends Component {
 
@@ -33,11 +64,12 @@ class criarProduto extends Component {
             categoria: null,
             nome: "",
             descricao: "",
+            url: null,
             preco: null,
             categoriaSelecionada: null,
             dangerAlert: false,
             successAlert: false,
-            mensageAlert: ""
+            mensageAlert: "",
           };
         }
     
@@ -53,7 +85,7 @@ class criarProduto extends Component {
     }
 
     async criarProdutos (){
-      const {data} = await Servico.post("/criar-produto",{nome:this.state.nome, descricao: this.state.descricao, preco: this.state.preco, categoria_id: this.state.categoriaSelecionada});
+      const {data} = await Servico.post("/criar-produto",{nome:this.state.nome, descricao: this.state.descricao, preco: this.state.preco, categoria_id: this.state.categoriaSelecionada, url: this.state.url});
       this.setState({
         mensageAlert: data['mensagem']
     }, () => {
@@ -81,6 +113,7 @@ class criarProduto extends Component {
 
 
     render() {
+      const { classes } = this.props;
       return (
                 <div>
                   <Col xs="12" md="12">
@@ -119,6 +152,7 @@ class criarProduto extends Component {
                             </FormGroup>
                           </Col>
                           <Col xs="12" md="6">
+
                             <FormGroup>
                               <Col md="3">
                                 <Label htmlFor="Categorias">Categorias</Label>
@@ -133,6 +167,29 @@ class criarProduto extends Component {
                                 </Input>
                               </Col>
                             </FormGroup>
+
+                            <FormGroup>
+                              <Col md="3">
+                                <Label htmlFor="Imagem  ">Imagem</Label>
+                              </Col>
+                              <Col xs="12" md="9">
+                              <div className="controls">
+                                  <Input placeholder="Url" id="appendedInputButton" size="16" type="text" value={this.state.url} onChange={(event) => this.setState({url: event.target.value})}/>
+                              </div>
+                              </Col>
+                            </FormGroup>
+
+                            {this.state.url && 
+                              <Col xs="12" md="9">
+                                <Card className={classes.card}>
+                                  <CardMedia
+                                    className={classes.media}
+                                    image={this.state.url}
+                                  />
+                              </Card> 
+                              </Col>
+                            }
+
                           </Col>
                         </Row>
 
@@ -151,5 +208,8 @@ class criarProduto extends Component {
     }
   }
   
-  export default criarProduto;
-  
+  criarProduto.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+  export default withStyles(styles)(criarProduto);

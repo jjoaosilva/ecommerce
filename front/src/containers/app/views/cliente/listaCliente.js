@@ -25,7 +25,7 @@ import {
   } from 'reactstrap';
 
 const columnData = [
-                        {"name": "Login"   , "id":"login"}, 
+                        {"name": "Login"   , "id":"id"}, 
                         {"name": "Nome"    , "id":"nome"}, 
                         {"name": ""        , "id":"editar"}
                   ];

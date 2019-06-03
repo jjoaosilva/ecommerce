@@ -35,7 +35,7 @@ def index():
         funcionarios = []
         for funcionario in response:
             funcionarios.append({
-                'login': funcionario['login'],
+                'id': funcionario['login'],
                 'nome': funcionario['nome'],
                 'salario': funcionario['salario']
             })
@@ -99,7 +99,7 @@ def index():
 def index():
     try:
         content = request.get_json(silent = True)
-        cDAO = ClienteDAO()
+        fDAO = FuncionarioDAO()
 
         response = fDAO.login(content['login'], content['senha'])
         if response == None:
@@ -122,5 +122,32 @@ def index():
         return jsonify({
             "status": False,
             "mensagem": "Problema no login do Funcionario!!",
+            "payload": error.args  
+        })
+
+@app.endpoint('/get-funcionario-id')
+def index():
+    try:
+        content = request.get_json(silent = True)
+        fDAO = FuncionarioDAO()
+
+        funcionario = fDAO.getFuncionarioById(content['login'])
+
+        response = {
+            "login" : funcionario.login,
+            "nome"  : funcionario.nome,
+            "salario": funcionario.salario, 
+        }
+
+        return jsonify({
+            "status": True,
+            "mensagem": None,
+            "payload": response
+        })
+
+    except Exception as error:
+        return jsonify({
+            "status": False,
+            "mensagem": "Problema na procura de Funcionario!!!",
             "payload": error.args  
         })

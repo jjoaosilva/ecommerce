@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Alert, Modal, ModalBody, ModalFooter, ModalHeader, Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Alert, Modal, ModalBody, ModalFooter, ModalHeader, Badge, CardBody, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import Servico from '../../../services/servico';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import red from '@material-ui/core/colors/red';
 
 import {
     Button,
@@ -23,36 +29,73 @@ import {
     Label
   } from 'reactstrap';
 
-
+  var styles = theme => ({
+    card: {
+      maxWidth: 350,
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%', // 16:9 
+    },
+    actions: {
+      display: 'flex',
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+    avatar: {
+      backgroundColor: red[500],
+    },
+  });
+  
 class editarProduto extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            id: "",
             isLoading: false,
             categoria: null,
             nome: "",
             descricao: "",
+            url: "",
             preco: null,
             categoriaSelecionada: null,
             dangerAlert: false,
             successAlert: false,
-            mensageAlert: ""
+            mensageAlert: "",
+            render: false
           };
         }
     
     componentWillMount(){
-      this.procurarCategorias()
-      const produto = JSON.parse(this.props.match.params.produto);
+      const produto = JSON.parse(atob(this.props.match.params.produto));
 
       if(produto){
         this.setState({
-          nome : produto['nome'],
-          descricao : produto['descricao'],
-          preco : produto['preco'],
-          categoriaSelecionada : produto['categoria'],
-        })
-      } 
+          id:produto['id']
+        }, ()=>this.getProduct())
+      }
+      this.procurarCategorias()
+    }
+
+    async getProduct (){
+      const {data} = await Servico.post("/get-produto-id",{id:this.state.id});
+      this.setState({
+          nome : data.payload['nome'],
+          descricao : data.payload['descricao'],
+          preco : data.payload['preco'],
+          url : data.payload['url'],
+          categoriaSelecionada : data.payload['categoria'],
+      }, () => this.setState({render: true}))
+     
     }
 
     async procurarCategorias (){
@@ -68,6 +111,7 @@ class editarProduto extends Component {
                 nome:this.state.nome, 
                 descricao: this.state.descricao, 
                 preco: this.state.preco, 
+                url: this.state.url, 
                 categoria_id: this.state.categoriaSelecionada
         });
         this.setState({
@@ -97,9 +141,10 @@ class editarProduto extends Component {
 
 
     render() {
+      const { classes } = this.props;
       return (
                 <div>
-                  <Col xs="12" md="12">
+                 {this.state.render && <Col xs="12" md="12">
                     <Card>
                       <CardBody><Col xs="3" md="3" style={{ paddingBottom: "20px" }}>
                         <h2>Editar Produto</h2>
@@ -149,6 +194,28 @@ class editarProduto extends Component {
                                 </Input>
                               </Col>
                             </FormGroup>
+
+                            <FormGroup>
+                              <Col md="3">
+                                <Label htmlFor="Imagem  ">Imagem</Label>
+                              </Col>
+                              <Col xs="12" md="9">
+                              <div className="controls">
+                                  <Input placeholder="Url" id="appendedInputButton" size="16" type="text" value={this.state.url} onChange={(event) => this.setState({url: event.target.value})}/>
+                              </div>
+                              </Col>
+                            </FormGroup>
+
+                            
+                              <Col xs="12" md="9">
+                                <Card className={classes.card}>
+                                  <CardMedia
+                                    className={classes.media}
+                                    image={this.state.url}
+                                  />
+                              </Card> 
+                              </Col>
+                            
                           </Col>
                         </Row>
 
@@ -156,16 +223,18 @@ class editarProduto extends Component {
                           <Button onClick={this.editarProduto.bind(this)} type="submit" color="primary">Salvar</Button>
                           <Link style={{ textDecoration: 'none' }} to={{pathname: '/listaProdutos', state: this.state }}>
                             <Button color="secondary">Voltar</Button> 
-                          </Link>  
-                          
+                          </Link>   
                         </div>
                       </CardBody>
                     </Card>
-                  </Col> 
+                  </Col> }
                 </div>
       );
     }
   }
   
-  export default editarProduto;
-  
+    editarProduto.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+  export default withStyles(styles)(editarProduto);

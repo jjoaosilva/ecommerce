@@ -8,20 +8,21 @@ class ProdutoDAO:
     def __init__(self):
         pass
 
-    def create(self, nome, descricao, preco, categoria_id):
+    def create(self, nome, descricao, preco, categoria_id, url):
 
-        produto = Produto(nome, descricao, preco, categoria_id)
+        produto = Produto(nome, descricao, preco, categoria_id, url)
         db.session.add(produto)
         db.session.commit()
 
         return {"nome"         : produto.nome, 
                 "descricao"    : produto.descricao, 
                 "preco"        : produto.preco, 
-                "categoria_id" : produto.categoria_id }
+                "categoria_id" : produto.categoria_id,
+                "url"          : produto.url }
    
     def read(self, nome):
 
-        sql = """ SELECT p.id, p.nome, p.descricao, p.preco, c.nome as categoria FROM produtos as p
+        sql = """ SELECT p.id, p.nome, p.descricao, p.preco, p.url, c.nome as categoria FROM produtos as p
                   INNER JOIN categorias as c ON c.id = p.categoria_id
               """
 
@@ -56,4 +57,13 @@ class ProdutoDAO:
         db.session.commit()
 
         return p
-    
+
+    def getProductById(self, id):
+
+        sql = """ SELECT p.id, p.nome, p.descricao, p.preco, p.url, c.nome as categoria, p.url FROM produtos as p
+                  INNER JOIN categorias as c ON c.id = p.categoria_id WHERE p.id={id}
+              """.format(id=id)
+
+        con = db.engine.connect()
+        produto = con.execute(sqlalchemy.text(sql)).fetchone()
+        return produto
