@@ -4,6 +4,10 @@ import DataTable from '../../componentes/dataTable';
 import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import Servico from '../../../services/servico';
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as TodoActions } from "../../../../../src/store/ducks/todos";
+
 import {
     Button,
     CardFooter,
@@ -190,5 +194,16 @@ class listaFuncionario extends Component {
     }
   }
   
-  export default listaFuncionario;
+  const mapStateToProps = state => ({
+    todos: state.todos
+  });
+  
+  const mapDispatchToProps = dispatch =>
+    bindActionCreators(TodoActions, dispatch);
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(listaFuncionario);
+
   
