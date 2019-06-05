@@ -88,7 +88,8 @@ def index():
                                 content['nome'], 
                                 content['descricao'], 
                                 content['preco'], 
-                                content['categoria_id'] )
+                                content['categoria_id'], 
+                                content['url'] )
 
         return jsonify({
             "status": True,
@@ -125,7 +126,8 @@ def index():
                 "nome"         : produto.nome, 
                 "descricao"    : produto.descricao, 
                 "preco"        : produto.preco, 
-                "categoria" : produto.categoria
+                "categoria"    : produto.categoria,
+                "imagem"       : produto.url
             })
         
         retorno = {}

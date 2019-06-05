@@ -34,20 +34,21 @@ class ProdutoDAO:
    
         return produtos
 
-    def update(self, id, nome, descricao, preco, categoria_id):
+    def update(self, id, nome, descricao, preco, categoria_id, url):
 
         produto = Produto.query.get(id)
         p = db.session.delete(produto)
         db.session.flush()
 
-        newProduto = Produto(nome, descricao, preco, categoria_id)
+        newProduto = Produto(nome, descricao, preco, categoria_id, url)
         db.session.add(newProduto)
         db.session.commit()
 
         return {"nome"         : newProduto.nome, 
                 "descricao"    : newProduto.descricao, 
                 "preco"        : newProduto.preco, 
-                "categoria_id" : newProduto.categoria_id }
+                "categoria_id" : newProduto.categoria_id, 
+                "url"          : newProduto.url  }
     
 
     def delete(self, id):

@@ -21,7 +21,7 @@ import { Button } from 'reactstrap';
 
 var styles = theme => ({
   card: {
-    maxWidth: 350,
+    maxWidth: 320,
   },
   media: {
     height: 0,
