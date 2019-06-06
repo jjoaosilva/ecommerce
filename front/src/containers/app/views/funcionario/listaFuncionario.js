@@ -6,7 +6,7 @@ import Servico from '../../../services/servico';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Creators as TodoActions } from "../../../../../src/store/ducks/todos";
+import { Creators as ProductsActions } from "../../../../store/ducks/carrinho";
 
 import {
     Button,
@@ -61,7 +61,8 @@ class listaFuncionario extends Component {
         });
     }
       
-    
+    componentWillMount(){
+    }
     componentDidMount(){
         this.procurarFuncionario()
     }
@@ -120,86 +121,108 @@ class listaFuncionario extends Component {
             }, () => setTimeout(() => this.setState({dangerAlert: false}), 5000))           
         }
     }
-
+    handleSubmit = e => {
+        e.preventDefault();
+    
+        this.props.addProduct(this.input.value);
+    
+        this.input.value = "";
+      };    
     render() {
+    const { carrinho} = this.props;
       return (
-                <div>
-                    <Col xs="12" md="12">
-                     <Card>
-                        <CardBody>
-                            <Col xs="3" md="3" style={{ paddingBottom: "20px" }}>
-                                <Link style={{ textDecoration: 'none' }} to={{pathname: '/criarFuncionario', state: this.state }}>
-                                    <Button color="primary" size="lg" block><span>Novo Funcionario</span></Button>  
-                                </Link>     
-                            </Col>  
+                        <section>
+                        <form onSubmit={this.handleSubmit}>
+                        <input ref={el => (this.input = el)} />
+                        <button type="submit">Novo</button>
+                        </form>
 
-                            <Col xs="12" md="6">
-                                <FormGroup row>
-                                    <Col md="12">
-                                    <InputGroup>
-                                    <Input size="lg" type="text" id="input1-group2" name="input1-group2" placeholder="Nome do Funcionario" value={this.state.input} onChange={(event) => this.setState({input: event.target.value})}/>
-                                        <InputGroupAddon addonType="append">
-                                        <Button type="button" color="primary" onClick={this.handleClick} >Pesquisar</Button>
-                                        </InputGroupAddon>
-                                    </InputGroup>
-                                    </Col>
-                                </FormGroup>
-                            </Col>           
+                        <ul>
+                        {carrinho.map(todo => (
+                            <li key={todo.id}>
+                            {todo.complete ? <s>{todo.text}</s> : todo.text}
+                            
+                            </li>
+                        ))}
+                        </ul>
+                    </section>
+                // <div>
+                //     <Col xs="12" md="12">
+                //      <Card>
+                //         <CardBody>
+                //             <Col xs="3" md="3" style={{ paddingBottom: "20px" }}>
+                //                 <Link style={{ textDecoration: 'none' }} to={{pathname: '/criarFuncionario', state: this.state }}>
+                //                     <Button color="primary" size="lg" block><span>Novo Funcionario</span></Button>  
+                //                 </Link>     
+                //             </Col>  
 
-                            <Col xs="12" lg="12" md="6" style={{ paddingTop: "20px" }}>
-                                {this.state.successAlert && 
-                                    <Alert color="success">
-                                        {this.state.mensageAlert}
-                                    </Alert>
-                                }
-                                {this.state.dangerAlert && 
-                                    <Alert color="danger">
-                                        {this.state.mensageAlert}
-                                    </Alert>
-                                }
+                //             <Col xs="12" md="6">
+                //                 <FormGroup row>
+                //                     <Col md="12">
+                //                     <InputGroup>
+                //                     <Input size="lg" type="text" id="input1-group2" name="input1-group2" placeholder="Nome do Funcionario" value={this.state.input} onChange={(event) => this.setState({input: event.target.value})}/>
+                //                         <InputGroupAddon addonType="append">
+                //                         <Button type="button" color="primary" onClick={this.handleClick} >Pesquisar</Button>
+                //                         </InputGroupAddon>
+                //                     </InputGroup>
+                //                     </Col>
+                //                 </FormGroup>
+                //             </Col>           
+
+                //             <Col xs="12" lg="12" md="6" style={{ paddingTop: "20px" }}>
+                //                 {this.state.successAlert && 
+                //                     <Alert color="success">
+                //                         {this.state.mensageAlert}
+                //                     </Alert>
+                //                 }
+                //                 {this.state.dangerAlert && 
+                //                     <Alert color="danger">
+                //                         {this.state.mensageAlert}
+                //                     </Alert>
+                //                 }
                                 
-                                {this.state.isLoading && 
-                                    <DataTable
-                                        ref={ref => this.dataTable = ref}
-                                        columnData={columnData}
-                                        titleTable = "Funcionarios"
-                                        data={this.state.data}
-                                        deleteItens={this.deleteItens.bind(this)}
-                                        editarItens={this.editarItens.bind(this)}
-                                        editPath={"/editarFuncionario"}
-                                    />
-                                }
-                            </Col>
+                //                 {this.state.isLoading && 
+                //                     <DataTable
+                //                         ref={ref => this.dataTable = ref}
+                //                         columnData={columnData}
+                //                         titleTable = "Funcionarios"
+                //                         data={this.state.data}
+                //                         deleteItens={this.deleteItens.bind(this)}
+                //                         editarItens={this.editarItens.bind(this)}
+                //                         editPath={"/editarFuncionario"}
+                //                     />
+                //                 }
+                //             </Col>
 
-                            <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
-                                className={'modal-danger ' + this.props.className}
-                            >
-                                <ModalHeader toggle={this.toggleDanger}>Deletar Funcionario</ModalHeader>
-                                <ModalBody>
-                                    <Col>
-                                        <div>Você Realmente quer deletar? Esta ação não poderá ser desfeita!</div>
-                                        <div>{this.state.modalText}</div>
-                                    </Col>
-                                </ModalBody>
-                                <ModalFooter>
-                                <Button color="danger" onClick={this.deletar.bind(this)}>Deletar</Button>{' '}
-                                <Button color="secondary" onClick={this.toggleDanger}>Cancelar</Button>
-                                </ModalFooter>
-                            </Modal>
-                        </CardBody>
-                    </Card>
-                  </Col> 
-                </div>
+                //             <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                //                 className={'modal-danger ' + this.props.className}
+                //             >
+                //                 <ModalHeader toggle={this.toggleDanger}>Deletar Funcionario</ModalHeader>
+                //                 <ModalBody>
+                //                     <Col>
+                //                         <div>Você Realmente quer deletar? Esta ação não poderá ser desfeita!</div>
+                //                         <div>{this.state.modalText}</div>
+                //                     </Col>
+                //                 </ModalBody>
+                //                 <ModalFooter>
+                //                 <Button color="danger" onClick={this.deletar.bind(this)}>Deletar</Button>{' '}
+                //                 <Button color="secondary" onClick={this.toggleDanger}>Cancelar</Button>
+                //                 </ModalFooter>
+                //             </Modal>
+                //         </CardBody>
+                //     </Card>
+                //   </Col> 
+                // </div>
       );
     }
   }
   
   const mapStateToProps = state => ({
-    todos: state.todos
+    carrinho: state.carrinho
   });
   
   const mapDispatchToProps = dispatch =>
-    bindActionCreators(TodoActions, dispatch);
+    bindActionCreators(ProductsActions, dispatch);
   
   export default connect(
     mapStateToProps,

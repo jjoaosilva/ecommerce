@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 
-import todos from "./todos";
+import carrinho from "./carrinho";
 
 export default combineReducers({
-    todos
+    carrinho
 });
