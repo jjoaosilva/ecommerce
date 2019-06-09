@@ -34,11 +34,24 @@ class DefaultHeader extends Component {
                 onClick={this.handleClick} 
                 to = "" 
                 className="nav-link">
-                  <Button 
-                    type="button" 
-                    color="primary"
-                    onClick={e => this.props.onLogout(e)} 
-                  > Sair</Button></NavLink>
+                  <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={{marginRight: '5px'}}>
+                      <Button 
+                        type="button" 
+                        color="primary" 
+                        onClick={e => this.props.verCarrinho(e)} 
+                      > Ver Carrinho</Button>
+                    </div>
+                    <div>
+                      <Button 
+                        type="button" 
+                        color="primary"
+                        onClick={e => this.props.onLogout(e)} 
+                      > Sair</Button>
+                    </div>
+                  </div>
+            </NavLink>
+                  
           </NavItem>
         </Nav>
       </React.Fragment>

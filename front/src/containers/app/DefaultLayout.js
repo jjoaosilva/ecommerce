@@ -25,7 +25,13 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class teste extends Component {
 
-  
+  constructor(props){
+    super(props)
+    this.state = {
+      redirect: false
+    }
+  }
+
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   signOut(e) {
@@ -34,12 +40,17 @@ class teste extends Component {
     this.props.history.push('/login')
   }
 
+  carrinho(e) {
+    e.preventDefault()
+    this.props.history.push('/carrinho')
+  }
+
   render() {
     return (
       <div className="app">
         <AppHeader fixed >
           <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+            <DefaultHeader onLogout={e=>this.signOut(e)} verCarrinho={e=>this.carrinho(e)}/>
           </Suspense>
         </AppHeader>
         <div className="app-body">

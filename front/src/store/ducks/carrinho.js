@@ -9,7 +9,10 @@ export const { Types, Creators } = createActions({
 const INITIAL_STATE = {
   quantidade_itens: 0,
   valor_total: 0,
-  itens: []
+  itens: [
+    {product_id: 55, product_preco: 45, product_quantidade: 2},
+    {product_id: 58, product_preco: 45, product_quantidade: 1}, 
+  ]
 };
 
 function manageCookies(state, action){

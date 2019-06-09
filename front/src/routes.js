@@ -35,6 +35,7 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
+
 const listaProduto = React.lazy(() => import('./containers/app/views/produto/listaProduto'));
 const editarProduto = React.lazy(() => import('./containers/app/views/produto/editarProduto'));
 const criarProduto = React.lazy(() => import('./containers/app/views/produto/criarProduto'));
@@ -54,10 +55,12 @@ const criarCliente = React.lazy(() => import('./containers/app/views/cliente/cri
 
 const home = React.lazy(() => import('./containers/app/views/home/index'));
 const ultimasVendas = React.lazy(() => import('./containers/app/views/vendas/ultimasVendas'));
+const carrinho = React.lazy(() => import('./containers/app/views/vendas/carrinho'));
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/home', name: 'Home', component: home },
+  { path: '/carrinho', name: 'Carrinho', component: carrinho },
   { path: '/vendas', name: 'Suas Vendas', component: ultimasVendas },
 
   { path: '/listaProdutos', name: 'Produtos', component: listaProduto },
