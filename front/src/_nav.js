@@ -39,6 +39,11 @@ export default {
       url: '/home',
       icon: 'cui-basket-loaded',
     },
+    {
+      name: 'Suas Vendas',
+      url: '/vendas',
+      icon: 'cui-credit-card',
+    },
     // {
     //   title: true,
     //   name: 'Components',

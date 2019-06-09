@@ -53,11 +53,12 @@ const editarCliente = React.lazy(() => import('./containers/app/views/cliente/ed
 const criarCliente = React.lazy(() => import('./containers/app/views/cliente/criarCliente'));
 
 const home = React.lazy(() => import('./containers/app/views/home/index'));
-
+const ultimasVendas = React.lazy(() => import('./containers/app/views/vendas/ultimasVendas'));
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/home', name: 'Home', component: home },
+  { path: '/vendas', name: 'Suas Vendas', component: ultimasVendas },
 
   { path: '/listaProdutos', name: 'Produtos', component: listaProduto },
   { path: '/editarProduto/:produto', name: 'Produtos', component: editarProduto },
