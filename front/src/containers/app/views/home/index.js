@@ -3,26 +3,9 @@ import ProductList from '../../componentes/productList';
 import { UncontrolledTooltip, Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 import Servico from '../../../services/servico';
 
-const dados = [
-  {
-    nome : "Comedouro para Cachorros",
-    descricao : "Os potes para cachorros da Zee.Dog são feitos de melamina para não acumularem bactéria, possuem base antiderrapante e estampas iradas. ",
-    imagem : "https://zeedog.vteximg.com.br/arquivos/ids/171309/comedouro-para-cachorros_zigzag_zeedog_cachorro_pet_dk_1_main.png",
-    categoria : "Cachorros"
-  },
-  {
-    nome : "Guia para Cachorros",
-    descricao : "A guia para cachorros Urban Helmets é uma edição especial da colab Zee.Dog + Urban Helmets, de tiragem limitada.",
-    imagem : "https://zeedog.vteximg.com.br/arquivos/guia-para-cachorros-ubarn-helmets-old-school-zeedog-cachorro-pet-dk-1-descricao.png",
-    categoria : "Cachorros"
-  },
-  {
-    nome : "Guia para Cachorros",
-    descricao : "A guia para cachorros Urban Helmets é uma edição especial da colab Zee.Dog + Urban Helmets, de tiragem limitada.",
-    imagem : "https://zeedog.vteximg.com.br/arquivos/guia-para-cachorros-ubarn-helmets-old-school-zeedog-cachorro-pet-dk-1-descricao.png",
-    categoria : "Cachorros"
-  }
-]
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as ProductsActions } from "../../../../store/ducks/carrinho";
 
 
 class home extends Component {
@@ -45,13 +28,35 @@ class home extends Component {
           data: data.payload
       }, ()=>console.log(this.state.data))
     }   
+ 
+     //     <section>
+                    //     <form onSubmit={this.handleSubmit}>
+                    //     <input ref={el => (this.input = el)} />
+                    //     <button type="submit">Novo</button>
+                    //     </form>
 
+                    //     <ul>
+                    //     {carrinho.map(todo => (
+                    //         <li key={todo.id}>
+                    //         {todo.complete ? <s>{todo.text}</s> : todo.text}
+                            
+                    //         </li>
+                    //     ))}
+                    //     </ul>
+                    // </section>
     render() {
       return (
               <div>
+                {this.props.carrinho.itens.map(todo => (
+                            <li >
+                            {todo.product_id}
+                            
+                            </li>
+                        ))}
                 {Object.keys(this.state.data).map((categoria, index) =>
                   <div style={{margin: '10px'}}>
                     <ProductList
+                        adicionarCarrinho={this.handleSubmit}
                         categoria={categoria}
                         products={this.state.data[categoria]}
                     />
@@ -62,6 +67,16 @@ class home extends Component {
       );
     }
   }
+  const mapStateToProps = state => ({
+    carrinho: state.carrinho
+  });
   
-  export default home;
+  const mapDispatchToProps = dispatch =>
+    bindActionCreators(ProductsActions, dispatch);
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(home);
+
   

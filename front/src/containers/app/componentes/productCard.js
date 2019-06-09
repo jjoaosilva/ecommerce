@@ -14,6 +14,10 @@ import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import { Button } from 'reactstrap';
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as ProductsActions } from "../../../store/ducks/carrinho";
+
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import ShareIcon from '@material-ui/icons/Share';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -52,6 +56,14 @@ class RecipeReviewCard extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  handleSubmit = product => {
+    this.props.addProduct({
+      product_id: this.props.product.id,
+      product_preco: this.props.product.preco,
+      product_quantidade: 1,
+    });
+  };  
+
   render() {
     const { classes } = this.props;
 
@@ -76,7 +88,7 @@ class RecipeReviewCard extends React.Component {
             className={classes.actions} disableActionSpacing
         >
           <div>
-            <Button color="primary" size="s" ><span>Adicionar ao Carrinho</span></Button>  
+            <Button onClick={this.handleSubmit} color="primary" size="s" ><span>Adicionar ao Carrinho</span></Button>  
           </div>
 
           <div style={{paddingLeft: '5px'}}>
@@ -93,4 +105,14 @@ RecipeReviewCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+const mapStateToProps = state => ({
+  carrinho: state.carrinho
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ProductsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(RecipeReviewCard));

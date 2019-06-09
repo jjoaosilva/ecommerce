@@ -43,6 +43,7 @@ class ProductList extends React.Component {
                         }}>
                         {this.props.products.map((product, index) =>
                             <ProductCard
+                                product = {product}
                                 key={index}
                                 style = {{flex: 1}}
                                 nome = {product.nome}
