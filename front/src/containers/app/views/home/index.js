@@ -29,30 +29,9 @@ class home extends Component {
       }, ()=>console.log(this.state.data))
     }   
  
-     //     <section>
-                    //     <form onSubmit={this.handleSubmit}>
-                    //     <input ref={el => (this.input = el)} />
-                    //     <button type="submit">Novo</button>
-                    //     </form>
-
-                    //     <ul>
-                    //     {carrinho.map(todo => (
-                    //         <li key={todo.id}>
-                    //         {todo.complete ? <s>{todo.text}</s> : todo.text}
-                            
-                    //         </li>
-                    //     ))}
-                    //     </ul>
-                    // </section>
     render() {
       return (
               <div>
-                {this.props.carrinho.itens.map(todo => (
-                            <li >
-                            {todo.product_id}
-                            
-                            </li>
-                        ))}
                 {Object.keys(this.state.data).map((categoria, index) =>
                   <div style={{margin: '10px'}}>
                     <ProductList

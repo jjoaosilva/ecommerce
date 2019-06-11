@@ -56,6 +56,18 @@ class RecipeReviewCard extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  componentWillMount(){
+    console.log("Product card: ", this.props)
+  }
+
+  rmv = product => {
+    this.props.rmvProduct({
+      product_id: this.props.product.id,
+      product_preco: this.props.product.preco,
+      product_quantidade: 1,
+    });
+  }
+
   handleSubmit = product => {
     this.props.addProduct({
       product_id: this.props.product.id,
@@ -92,7 +104,7 @@ class RecipeReviewCard extends React.Component {
           </div>
 
           <div style={{paddingLeft: '5px'}}>
-            <Button color="primary" size="s" ><span>Comprar</span></Button>  
+            <Button onClick={this.rmv} color="primary" size="s" ><span>Comprar</span></Button>  
           </div>
  
         </CardActions>

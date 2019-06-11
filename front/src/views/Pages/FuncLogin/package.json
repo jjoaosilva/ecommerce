@@ -1,0 +1,6 @@
+{
+  "name": "FuncLogin",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FuncLogin.js"
+}

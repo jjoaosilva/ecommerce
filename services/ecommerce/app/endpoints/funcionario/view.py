@@ -100,9 +100,9 @@ def index():
     try:
         content = request.get_json(silent = True)
         fDAO = FuncionarioDAO()
-
+        print(content)
         response = fDAO.login(content['login'], content['senha'])
-        if response == None:
+        if response == None or response.senha != content['senha']:
             return jsonify({
                 "status": False,
                 "mensagem": "Login ou senha incorretos.",

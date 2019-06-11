@@ -47,7 +47,7 @@ class DefaultHeader extends Component {
                         type="button" 
                         color="primary"
                         onClick={e => this.props.onLogout(e)} 
-                      > Sair</Button>
+                      > { (localStorage.getItem("user")||localStorage.getItem("func")) ? "Sair":"Login"}</Button>
                     </div>
                   </div>
             </NavLink>

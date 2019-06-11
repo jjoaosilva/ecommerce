@@ -10,8 +10,9 @@ class FuncionarioDAO:
 
     def login(self, login, senha):
         funcionario = Funcionario.query.filter_by(login = login).first()
-        
+        print(funcionario)
         return funcionario
+
     def create(self, login, nome, senha, salario):
 
         funcionario = Funcionario(login, nome, senha, salario)

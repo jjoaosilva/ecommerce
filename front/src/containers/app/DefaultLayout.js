@@ -37,6 +37,7 @@ class teste extends Component {
   signOut(e) {
     e.preventDefault()
     localStorage.removeItem("user");
+    localStorage.removeItem("func");
     this.props.history.push('/login')
   }
 
@@ -79,7 +80,7 @@ class teste extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/listaProdutos" />
+                  <Redirect from="/" to="/home" />
                 </Switch>
               </Suspense>
             </Container>
