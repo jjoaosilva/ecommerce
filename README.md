@@ -28,22 +28,22 @@ Esse trabalho foi desenvolvimento na disciplica de Programação WEB na Universi
 
 ## Telas
 ### Login do cliente
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/loginCliente.PNG?raw=true)
 ### Login do funcionario
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/LoginFuncionario.PNG?raw=true)
 ### Registrar usuario
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/registrar.PNG?raw=true)
 ### Home
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/home.PNG?raw=true)
 ### Carrinho de compras
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/carrinho.PNG?raw=true)
 ### Compras realizadas
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/vendas.PNG?raw=true)
 ### Lista de produtos cadastrados
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/dataTable.PNG?raw=true)
 ### Registrar Produto
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/novoProduto.PNG?raw=true)
 ### Deletar Produto
-![alt text](?raw=true)
+![alt text](https://github.com/jjoaosilva/ecommerce/blob/master/img/deletar.PNG?raw=true)
 
 #### Imagens retiradas [aqui](https://www.zeedog.com.br/)
