@@ -1,4 +1,4 @@
-# eCommerce
+# E-Commerce
 Pequeno eCommerce construido com ReactJs e Flask.
 
 ### Autor:
