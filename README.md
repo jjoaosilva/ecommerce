@@ -1,14 +1,14 @@
 # E-Commerce
-Pequeno eCommerce construido com ReactJs e Flask.
+eCommerce construido com ReactJs e Flask.
 
 ### Autor:
 
 * **José João Silva** - [jjoaosilva](https://github.com/jjoaosilva/)
 
 ## Sobre
-Esse trabalho foi desenvolvimento na disciplica de Programação WEB na Universidade Federal de Ceará (UFC)
+Esse trabalho foi desenvolvimento na disciplina de Programação WEB na Universidade Federal de Ceará (UFC)
 
-### Alguns dos requisitos
+### Requisitos
 
 * Seguir padrão MVC
 * Restringir dados para cada tipo de usuario: Cliente e Funcionario
